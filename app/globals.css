@@ -38,3 +38,9 @@ body {
   min-width: 1440px;
   padding: 0 64px;
 }
+
+button {
+  cursor: pointer;
+  
+}
+
