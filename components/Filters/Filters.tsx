@@ -97,7 +97,7 @@ export const Filters: React.FC = () => {
           <div className="w-[360px] h-px bg-(--gray-light) my-6"></div>
           <div className="flex gap-3 mb-10">
             {[
-              { label: "Van", value: "Van" },
+              { label: "Van", value: "panelTruck" },
               { label: "Fully Integrated", value: "fullyIntegrated" },
               { label: "Alcove", value: "alcove" },
             ].map((option) => (

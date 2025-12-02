@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import axios from "axios";
-import { Camper } from "@/types/camper";
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL;
+import { Camper } from "@/types/camper";
+import { api } from "../api";
 
 export async function GET(req: NextRequest) {
   try {
@@ -11,7 +10,7 @@ export async function GET(req: NextRequest) {
     const page = parseInt(searchParams.get("page") || "1");
     const limit = parseInt(searchParams.get("limit") || "4");
 
-    const response = await axios.get<Camper[]>(`${BACKEND_URL}/campers`, {
+    const response = await api.get<Camper[]>("/campers", {
       params: { page, limit },
     });
 
