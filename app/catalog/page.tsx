@@ -1,4 +1,4 @@
-import { CampersList } from "@/components/CampersList/CampersList";
+import CampersList from "@/components/CampersList/CampersList";
 import { Filters } from "@/components/Filters/Filters";
 
 const CatalogPage = () => {

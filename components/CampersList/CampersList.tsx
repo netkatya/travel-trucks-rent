@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import Image from "next/image";
 import { useCampersStore } from "@/lib/store/useCampersStore";
@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Map } from "lucide-react";
 import { icons } from "@/app/constants/icons";
 
-export const CampersList: React.FC = () => {
+export default function CampersList() {
   const {
     campers,
     fetchCampers,
@@ -146,4 +146,4 @@ export const CampersList: React.FC = () => {
       {!hasMore && campers.length > 0 && <p>No more campers to load.</p>}
     </div>
   );
-};
+}
