@@ -1,20 +1,25 @@
+import { isAxiosError } from "axios";
 import { NextResponse } from "next/server";
 import { api } from "../../api";
-import { Camper } from "@/types/camper";
 
-export async function GET(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
-  const { id } = params;
+type Props = {
+  params: Promise<{ id: string }>;
+};
 
+export async function GET(request: Request, { params }: Props) {
   try {
-    const response = await api.get<Camper>(`/campers/${id}`);
-    return NextResponse.json(response.data);
+    const { id } = await params;
+    const res = await api(`/campers/${id}`);
+    return NextResponse.json(res.data, { status: res.status });
   } catch (error) {
-    console.error("API error:", error);
+    if (isAxiosError(error)) {
+      return NextResponse.json(
+        { error: error.message, response: error.response?.data },
+        { status: error.status }
+      );
+    }
     return NextResponse.json(
-      { error: "Failed to fetch camper details" },
+      { error: "Internal Server Error" },
       { status: 500 }
     );
   }

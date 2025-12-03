@@ -45,9 +45,13 @@ export async function GET(req: NextRequest) {
       );
     }
 
+    const uniqueItems = Array.from(
+      new Map(items.map((c) => [c.id, c])).values()
+    );
+
     const start = (page - 1) * limit;
     const end = start + limit;
-    const paginated = items.slice(start, end);
+    const paginated = uniqueItems.slice(start, end);
     const hasMore = end < items.length;
 
     return NextResponse.json({

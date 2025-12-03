@@ -9,4 +9,8 @@ export const icons: { [key: string]: string } = {
   gas: "icon-hugeicons_gas-stove",
   water: "icon-water-drop",
   automatic: "icon-diagram",
+
+  panelTruck: "icon-bi_grid-1x2",
+  fullyIntegrated: "icon-bi_grid",
+  alcove: "icon-bi_grid-3x3",
 };

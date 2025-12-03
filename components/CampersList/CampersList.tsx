@@ -25,9 +25,9 @@ export default function CampersList() {
 
   return (
     <div className="flex flex-col gap-8">
-      {campers.map((camper) => (
+      {campers.map((camper, index) => (
         <div
-          key={camper.id}
+          key={`${camper.id}-${index}`}
           className="border border-(--gray-light) rounded-[20px] p-6 w-[888px] h-[368px] flex gap-3"
         >
           <Image
@@ -44,7 +44,7 @@ export default function CampersList() {
               </h2>
               <div className="flex gap-4 items-center">
                 <p className="font-semibold text-[24px] leading-[133%]">
-                  ${camper.price.toFixed(2)}
+                  €{camper.price.toFixed(2)}
                 </p>
                 <button
                   className="p-2 rounded"
@@ -134,11 +134,7 @@ export default function CampersList() {
       {loading && <Loader />}
       {hasMore && !loading && (
         <button
-          className="border border-(--gray-light) 
-  rounded-[200px]  
-  w-[145px] h-14
-  flex items-center justify-center
-  cursor-pointer font-medium text-base leading-normal tracking-[-0.01em]"
+          className="border border-(--gray-light) rounded-[200px] w-[145px] h-14 flex items-center justify-center cursor-pointer font-medium text-base leading-normal tracking-[-0.01em] m-auto"
           onClick={loadMore}
         >
           Load More

@@ -40,7 +40,7 @@ export default function Filters() {
   };
 
   return (
-    <div className="w-[360px]">
+    <div className="w-[360px] ">
       {/* Location */}
       <div className="relative w-[360px] mb-10">
         <label className="font-normal text-base leading-normal text-(--gray)">
@@ -107,9 +107,12 @@ export default function Filters() {
               className="peer hidden"
             />
             <div
-              className="border border-(--gray-light) rounded-xl w-28 h-24 flex items-center justify-center text-center
+              className="border border-(--gray-light) rounded-xl w-28 h-24 flex flex-col items-center justify-center text-center
                  peer-checked:border-(--button) cursor-pointer transition-colors capitalize"
             >
+              <svg className="w-6 h-6 mb-2 fill-(--main)">
+                <use href={`/icons.svg#${icons.automatic}`} />
+              </svg>
               Automatic
             </div>
           </label>
@@ -137,10 +140,15 @@ export default function Filters() {
                   className="peer hidden"
                 />
                 <div
-                  className="border border-(--gray-light) rounded-xl w-28 h-24 flex items-center justify-center text-center
+                  className="border border-(--gray-light) rounded-xl w-28 h-24 flex flex-col items-center justify-center text-center
                     peer-checked:border-(--button) cursor-pointer transition-colors"
                 >
-                  {option.label}
+                  {icons[option.value] && (
+                    <svg className="w-6 h-6 mb-2 fill-(--main)">
+                      <use href={`/icons.svg#${icons[option.value]}`} />
+                    </svg>
+                  )}
+                  <span>{option.label}</span>
                 </div>
               </label>
             ))}

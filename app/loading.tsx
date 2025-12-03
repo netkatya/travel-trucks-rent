@@ -2,7 +2,7 @@
 
 export default function Loader() {
   return (
-    <div className="fixed inset-0 w-screen h-screen flex justify-center items-center z-[99] bg-white/50">
+    <div className="fixed inset-0 w-screen h-screen flex justify-center items-center z-99 bg-white/50">
       <div className="w-fit h-fit flex flex-col items-center justify-end relative">
         {/* Truck body */}
         <div className="w-[130px] mb-1.5 animate-truck-bounce">
