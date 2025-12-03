@@ -1,19 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { useCampersStore } from "@/lib/store/useCampersStore";
-import { EquipmentKey } from "@/types/camper";
 import { CamperForm } from "@/types/filters";
 import { Map } from "lucide-react";
 import { icons } from "@/app/constants/icons";
 
-export const Filters: React.FC = () => {
+export default function Filters() {
   const { filters, setFilters } = useCampersStore();
   const [location, setLocation] = useState(filters.location || "");
   const [focused, setFocused] = useState(false);
   const [form, setForm] = useState<CamperForm | "">(filters.form || "");
-  const [equipment, setEquipment] = useState<EquipmentKey[]>(
-    filters.equipment || []
+  const [equipment, setEquipment] = useState<
+    ("AC" | "kitchen" | "TV" | "bathroom")[]
+  >(filters.equipment || []);
+  const [transmission, setTransmission] = useState<"" | "automatic">(
+    filters.transmission === "automatic" ? "automatic" : ""
   );
 
   const handleApply = () => {
@@ -21,10 +23,11 @@ export const Filters: React.FC = () => {
       location: location || undefined,
       form: form || undefined,
       equipment: equipment.length ? equipment : undefined,
+      transmission: transmission || undefined,
     });
   };
 
-  const toggleEquipment = (key: EquipmentKey) => {
+  const toggleEquipment = (key: "AC" | "kitchen" | "TV" | "bathroom") => {
     if (equipment.includes(key)) {
       setEquipment(equipment.filter((e) => e !== key));
     } else {
@@ -32,8 +35,13 @@ export const Filters: React.FC = () => {
     }
   };
 
+  const toggleTransmission = () => {
+    setTransmission(transmission === "automatic" ? "" : "automatic");
+  };
+
   return (
     <div className="w-[360px]">
+      {/* Location */}
       <div className="relative w-[360px] mb-10">
         <label className="font-normal text-base leading-normal text-(--gray)">
           Location
@@ -56,18 +64,19 @@ export const Filters: React.FC = () => {
         />
       </div>
 
+      {/* Filters */}
       <div>
         <p className="font-medium text-base leading-[150%] text-(--text) mb-8">
           Filters
         </p>
+
+        {/* Vehicle equipment */}
         <p className="font-semibold text-[20px] leading-[120%]">
           Vehicle equipment
         </p>
         <div className="w-[360px] h-px bg-(--gray-light) my-6"></div>
         <div className="flex flex-wrap gap-3 mb-8">
-          {(
-            ["AC", "automatic", "kitchen", "TV", "bathroom"] as EquipmentKey[]
-          ).map((key) => (
+          {(["AC", "kitchen", "TV", "bathroom"] as const).map((key) => (
             <label key={key} className="relative">
               <input
                 type="checkbox"
@@ -77,8 +86,7 @@ export const Filters: React.FC = () => {
               />
               <div
                 className="border border-(--gray-light) rounded-xl w-28 h-24 flex flex-col items-center justify-center text-center
-                     peer-checked:border-(--button) 
-                     transition-colors cursor-pointer mix-blend-multiply capitalize"
+                  peer-checked:border-(--button) transition-colors cursor-pointer mix-blend-multiply capitalize"
               >
                 {icons[key] && (
                   <svg className="w-6 h-6 mb-2 fill-(--main)">
@@ -89,7 +97,25 @@ export const Filters: React.FC = () => {
               </div>
             </label>
           ))}
+
+          {/* Automatic transmission */}
+          <label className="relative">
+            <input
+              type="checkbox"
+              checked={transmission === "automatic"}
+              onChange={toggleTransmission}
+              className="peer hidden"
+            />
+            <div
+              className="border border-(--gray-light) rounded-xl w-28 h-24 flex items-center justify-center text-center
+                 peer-checked:border-(--button) cursor-pointer transition-colors capitalize"
+            >
+              Automatic
+            </div>
+          </label>
         </div>
+
+        {/* Vehicle type */}
         <div>
           <label className="font-semibold text-[20px] leading-[120%]">
             Vehicle type
@@ -122,14 +148,13 @@ export const Filters: React.FC = () => {
         </div>
       </div>
 
+      {/* Apply button */}
       <button
         onClick={handleApply}
-        className="rounded-full w-[166px] h-14 
-               bg-(--button) hover:bg-(--button-hover) font-medium text-base leading-[150%] 
-               tracking-[-0.01em] text-(--white) transition-colors duration-300"
+        className="rounded-full w-[166px] h-14 bg-(--button) hover:bg-(--button-hover) font-medium text-base leading-[150%] tracking-[-0.01em] text-(--white) transition-colors duration-300"
       >
         Apply Filters
       </button>
     </div>
   );
-};
+}

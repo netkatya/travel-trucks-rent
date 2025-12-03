@@ -9,7 +9,7 @@ export interface CampersState {
   hasMore: boolean;
   loading: boolean;
   filters: CamperFilters;
-  fetchCampers: () => Promise<void>;
+  fetchCampers: (reset?: boolean) => Promise<void>;
   loadMore: () => Promise<void>;
   toggleFavorite: (id: string) => void;
   setFilters: (filters: CamperFilters) => void;

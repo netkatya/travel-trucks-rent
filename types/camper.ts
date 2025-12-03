@@ -71,3 +71,5 @@ export interface CampersApiResponse {
   total: number;
   items: Camper[];
 }
+
+export type CamperApiResponse = Camper[] | { items: Camper[] };

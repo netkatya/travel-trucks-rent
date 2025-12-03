@@ -2,8 +2,9 @@ import { EquipmentKey } from "./camper";
 
 export interface CamperFilters {
   location?: string;
-  form?: "panelTruck" | "fullyIntegrated" | "alcove";
-  equipment?: EquipmentKey[];
+  form?: CamperForm;
+  equipment?: Exclude<EquipmentKey, "automatic">[];
+  transmission?: "automatic";
 }
 
 export type CamperForm = "panelTruck" | "fullyIntegrated" | "alcove";
@@ -14,3 +15,9 @@ export type EquipmentFilter =
   | "kitchen"
   | "TV"
   | "bathroom";
+
+export interface FetchCampersParams {
+  page?: number;
+  limit?: number;
+  filters?: CamperFilters;
+}
