@@ -44,3 +44,38 @@ button {
   
 }
 
+
+@layer utilities {
+  @keyframes truck-bounce {
+    0% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(3px);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  .animate-truck-bounce {
+    animation: truck-bounce 1s linear infinite;
+  }
+
+  @keyframes road-move {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-350px);
+    }
+  }
+
+  .animate-road-move {
+    animation: road-move 1.4s linear infinite;
+  }
+}
+

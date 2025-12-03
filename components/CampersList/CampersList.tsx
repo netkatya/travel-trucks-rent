@@ -6,6 +6,7 @@ import { useCampersStore } from "@/lib/store/useCampersStore";
 import Link from "next/link";
 import { Map } from "lucide-react";
 import { icons } from "@/app/constants/icons";
+import Loader from "@/app/loading";
 
 export default function CampersList() {
   const {
@@ -130,7 +131,7 @@ export default function CampersList() {
           </div>
         </div>
       ))}
-      {loading && <p>Loading...</p>}
+      {loading && <Loader />}
       {hasMore && !loading && (
         <button
           className="border border-(--gray-light) 
