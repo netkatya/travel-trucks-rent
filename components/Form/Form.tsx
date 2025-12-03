@@ -1,4 +1,4 @@
-import { ErrorMessage, Field, Formik, Form } from "formik";
+import { ErrorMessage, Field, Formik, Form, FormikHelpers } from "formik";
 import * as Yup from "yup";
 
 export default function BookingForm() {
@@ -16,9 +16,13 @@ export default function BookingForm() {
     comment: Yup.string(),
   });
 
-  const onSubmit = (values: typeof initialValues) => {
+  const onSubmit = (
+    values: typeof initialValues,
+    formikHelpers: FormikHelpers<typeof initialValues>
+  ) => {
     console.log(values);
     alert("Booking submitted!");
+    formikHelpers.resetForm();
   };
 
   return (
@@ -38,7 +42,7 @@ export default function BookingForm() {
           <Field
             name="name"
             placeholder="Name*"
-            className="rounded-xl px-[18px] py-[18px] pr-[337px] w-full h-[60px] bg-(--inputs)"
+            className="rounded-xl px-[18px] py-[18px] w-full h-[60px] bg-(--inputs)"
           />
           <ErrorMessage
             name="name"
@@ -50,7 +54,7 @@ export default function BookingForm() {
             name="email"
             type="email"
             placeholder="Email*"
-            className="rounded-xl px-[18px] py-[18px] pr-[337px] w-full h-[60px] bg-(--inputs)"
+            className="rounded-xl px-[18px] py-[18px] w-full h-[60px] bg-(--inputs)"
           />
           <ErrorMessage
             name="email"
@@ -62,7 +66,7 @@ export default function BookingForm() {
             name="bookingDate"
             type="date"
             placeholder="Booking date*"
-            className="rounded-xl px-[18px] py-[18px] pr-[337px] w-full h-[60px] bg-(--inputs)"
+            className="rounded-xl px-[18px] py-[18px] w-full h-[60px] bg-(--inputs)"
           />
           <ErrorMessage
             name="bookingDate"
@@ -74,7 +78,7 @@ export default function BookingForm() {
             name="comment"
             as="textarea"
             placeholder="Comment"
-            className="rounded-[10px] px-[18px] py-[18px] pr-[308px] pb-[76px] w-full h-[118px] bg-(--inputs) resize-none"
+            className="rounded-[10px] px-[18px] py-[18px] pb-[76px] w-full h-[118px] bg-(--inputs) resize-none"
           />
 
           <button
