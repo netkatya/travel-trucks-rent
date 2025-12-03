@@ -39,7 +39,7 @@ export default function CampersList() {
           />
           <div className="">
             <div className="flex justify-between items-center">
-              <h2 className="font-semibold text-[24px] leading-[133%]">
+              <h2 className="font-semibold text-[24px] leading-[133%] max-h-8 overflow-hidden">
                 {camper.name}
               </h2>
               <div className="flex gap-4 items-center">
