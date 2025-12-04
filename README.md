@@ -6,7 +6,7 @@ This project is the frontend part of **TravelTrucks**, a camper rental company. 
 Built with **Next.js**, **TypeScript**, **Zustand**, and **Axios**.
 
 ## Live Demo
-- [Live site on Vercel/Netlify](YOUR_LIVE_URL)
+- [Live site on Vercel](https://travel-trucks-rent-five.vercel.app/)
 
 ## Pages
 
