@@ -1,70 +1,59 @@
 import { NextRequest, NextResponse } from "next/server";
+import { isAxiosError } from "axios";
 import { api } from "../api";
-import { Camper } from "@/types/camper";
 
-interface CampersApiResponse {
-  items: Camper[];
-  total?: number;
-  page?: number;
-  limit?: number;
-  hasMore?: boolean;
-}
+const booleanFilters = [
+  "AC",
+  "bathroom",
+  "kitchen",
+  "TV",
+  "radio",
+  "refrigerator",
+  "microwave",
+  "gas",
+  "water",
+] as const;
 
-export async function GET(req: NextRequest) {
+export async function GET(request: NextRequest) {
   try {
-    const { searchParams } = new URL(req.url);
+    const searchParams = request.nextUrl.searchParams;
 
-    const page = parseInt(searchParams.get("page") || "1", 10);
-    const limit = parseInt(searchParams.get("limit") || "4", 10);
-
-    const location = searchParams.get("location");
-    const form = searchParams.get("form");
-    const transmission = searchParams.get("transmission");
-
-    const AC = searchParams.get("AC");
-    const TV = searchParams.get("TV");
-    const kitchen = searchParams.get("kitchen");
-    const bathroom = searchParams.get("bathroom");
+    const page = Number(searchParams.get("page") ?? 1);
+    const limit = Number(searchParams.get("limit") ?? 4);
 
     const params: Record<string, string | number | boolean> = {
       page,
       limit,
-      ...(location && { location }),
-      ...(transmission && { transmission }),
-      ...(AC && { AC: true }),
-      ...(TV && { TV: true }),
-      ...(kitchen && { kitchen: true }),
-      ...(bathroom && { bathroom: true }),
-      ...(form && { form }),
     };
 
-    const res = await api.get<CampersApiResponse | Camper[]>("/campers", {
-      params,
+    const stringFilters = [
+      "location",
+      "form",
+      "transmission",
+      "engine",
+    ] as const;
+    stringFilters.forEach((key) => {
+      const value = searchParams.get(key);
+      if (value) params[key] = value;
     });
 
-    let items: Camper[];
-    if (Array.isArray(res.data)) {
-      items = res.data;
-    } else {
-      items = res.data.items;
-    }
-
-    const start = (page - 1) * limit;
-    const end = start + limit;
-    const paginated = items.slice(start, end);
-    const hasMore = end < items.length;
-
-    return NextResponse.json({
-      items: paginated,
-      total: items.length,
-      page,
-      limit,
-      hasMore,
+    booleanFilters.forEach((key) => {
+      const value = searchParams.get(key);
+      if (value) params[key] = true;
     });
+
+    const res = await api("/campers", { params });
+
+    return NextResponse.json(res.data, { status: res.status });
   } catch (error) {
-    console.error("API error:", error);
+    if (isAxiosError(error)) {
+      return NextResponse.json(
+        { error: error.message, response: error.response?.data },
+        { status: error.response?.status ?? 500 }
+      );
+    }
     return NextResponse.json(
-      { error: "Failed to fetch campers" },
+      { error: "Internal Server Error" },
       { status: 500 }
     );
   }
