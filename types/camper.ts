@@ -54,19 +54,6 @@ export interface CamperDetailsPageProps {
   id: string;
 }
 
-export interface CamperQueryParams {
-  page?: number;
-  limit?: number;
-  location?: string;
-  form?: string;
-
-  AC?: boolean;
-  kitchen?: boolean;
-  TV?: boolean;
-  bathroom?: boolean;
-  transmission?: "automatic";
-}
-
 export interface CampersApiResponse {
   total: number;
   items: Camper[];

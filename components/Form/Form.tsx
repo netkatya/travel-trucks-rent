@@ -1,4 +1,5 @@
 import { ErrorMessage, Field, Formik, Form, FormikHelpers } from "formik";
+import { toast, ToastContainer } from "react-toastify";
 import * as Yup from "yup";
 
 export default function BookingForm() {
@@ -21,7 +22,7 @@ export default function BookingForm() {
     formikHelpers: FormikHelpers<typeof initialValues>
   ) => {
     console.log(values);
-    alert("Booking submitted!");
+    toast.success("Booking submitted!");
     formikHelpers.resetForm();
   };
 
@@ -85,10 +86,11 @@ export default function BookingForm() {
             type="submit"
             className="rounded-[200px] px-[60px] py-4 mt-2 w-[166px] h-14 bg-(--button) font-medium text-[16px] leading-normal tracking-[-0.01em] text-(--white) m-auto"
           >
-            Submit
+            Send
           </button>
         </Form>
       </Formik>
+      <ToastContainer position="top-center" autoClose={2000} />
     </div>
   );
 }

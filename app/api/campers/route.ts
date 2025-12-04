@@ -1,62 +1,65 @@
+// app/api/campers/route.ts
 import { NextRequest, NextResponse } from "next/server";
+import { api } from "../api"; // твой axios-инстанс
 import { Camper } from "@/types/camper";
-import { api } from "../api";
 
-type CamperApiResponse = Camper[] | { items: Camper[] };
+interface CampersApiResponse {
+  items: Camper[];
+  total?: number;
+  page?: number;
+  limit?: number;
+  hasMore?: boolean;
+}
 
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
 
-    const page = parseInt(searchParams.get("page") || "1");
-    const limit = parseInt(searchParams.get("limit") || "4");
+    const page = parseInt(searchParams.get("page") || "1", 10);
+    const limit = parseInt(searchParams.get("limit") || "4", 10);
 
-    const location = searchParams.get("location") || "";
-    const form = searchParams.get("form") || "";
-    const transmission = searchParams.get("transmission") || "";
-    const equipment = searchParams.get("equipment")?.split(",") || [];
+    const location = searchParams.get("location");
+    const form = searchParams.get("form");
+    const transmission = searchParams.get("transmission");
 
-    const response = await api.get<CamperApiResponse>("/campers");
+    const AC = searchParams.get("AC");
+    const TV = searchParams.get("TV");
+    const kitchen = searchParams.get("kitchen");
+    const bathroom = searchParams.get("bathroom");
+
+    const params: Record<string, string | number | boolean> = {
+      page,
+      limit,
+      ...(location && { location }),
+      ...(form && { form }),
+      ...(transmission && { transmission }),
+      ...(AC && { AC: true }),
+      ...(TV && { TV: true }),
+      ...(kitchen && { kitchen: true }),
+      ...(bathroom && { bathroom: true }),
+    };
+
+    const res = await api.get<CampersApiResponse | Camper[]>("/campers", {
+      params,
+    });
 
     let items: Camper[];
-
-    if (Array.isArray(response.data)) {
-      items = response.data;
+    if (Array.isArray(res.data)) {
+      items = res.data;
     } else {
-      items = response.data.items;
+      items = res.data.items;
     }
-
-    if (location) {
-      const loc = location.toLowerCase();
-      items = items.filter((c) => c.location.toLowerCase().includes(loc));
-    }
-
-    if (form) {
-      items = items.filter((c) => c.form === form);
-    }
-
-    if (transmission) {
-      items = items.filter((c) => c.transmission === transmission);
-    }
-
-    if (equipment.length) {
-      items = items.filter((c) =>
-        equipment.every((k) => c[k as keyof Camper] === true)
-      );
-    }
-
-    const uniqueItems = Array.from(
-      new Map(items.map((c) => [c.id, c])).values()
-    );
 
     const start = (page - 1) * limit;
     const end = start + limit;
-    const paginated = uniqueItems.slice(start, end);
+    const paginated = items.slice(start, end);
     const hasMore = end < items.length;
 
     return NextResponse.json({
       items: paginated,
       total: items.length,
+      page,
+      limit,
       hasMore,
     });
   } catch (error) {

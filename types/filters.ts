@@ -21,3 +21,16 @@ export interface FetchCampersParams {
   limit?: number;
   filters?: CamperFilters;
 }
+
+export interface CamperQueryParams {
+  page?: number;
+  limit?: number;
+  location?: string;
+  form?: string;
+
+  AC?: boolean;
+  kitchen?: boolean;
+  TV?: boolean;
+  bathroom?: boolean;
+  transmission?: "automatic";
+}
