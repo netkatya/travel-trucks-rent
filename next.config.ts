@@ -5,6 +5,7 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: ["ftp.goit.study"],
+    unoptimized: true,
   },
 };
 
