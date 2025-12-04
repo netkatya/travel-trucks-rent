@@ -12,10 +12,10 @@ export default function Hero() {
       <div className="absolute inset-0 bg-black/20">
         <div className="container">
           <div className="py-[260px] z-10">
-            <h1 className="font-semibold text-5xl leading-[67%] text-(--inputs) mb-4">
+            <h1 className="font-semibold text-3xl lg:text-5xl leading-[67%] text-(--inputs) mb-6 lg:mb-4">
               Campers of your dreams
             </h1>
-            <p className="  font-semibold text-xl leading-[133%] text-(--inputs) mb-10">
+            <p className="  font-semibold text-xl lg:text-xl leading-[133%] text-(--inputs) mb-10">
               You can find everything you want in our catalog
             </p>
             <Link

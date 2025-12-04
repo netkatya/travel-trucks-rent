@@ -4,7 +4,7 @@ import Filters from "@/components/Filters/Filters";
 export default function CatalogPage() {
   return (
     <main className="py-12">
-      <div className="container flex gap-16">
+      <div className="container flex flex-col lg:flex-row gap-16">
         <div>
           <Filters />
         </div>

@@ -71,7 +71,7 @@ export default function CamperPage() {
           <p className="font-semibold text-[24px] leading-[133%] mb-7">
             €{camper.price.toFixed(2)}
           </p>
-          <div className="flex gap-12 mb-7">
+          <div className="flex flex-col lg:flex-row gap-12 mb-7">
             {camper.gallery.map((img, index) => (
               <Image
                 width={292}
@@ -107,7 +107,7 @@ export default function CamperPage() {
             Reviews
           </button>
         </div>
-        <div className="flex gap-10">
+        <div className="flex flex-col lg:flex-row gap-10">
           <div>
             <div>
               {activeTab === "features" && <Features camper={camper} />}

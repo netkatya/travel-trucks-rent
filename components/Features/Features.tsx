@@ -18,8 +18,8 @@ export default function Features({ camper }: FeaturesProps) {
   };
 
   return (
-    <div className="w-[631px] h-[588px] px-[52px] py-11 bg-(--inputs) rounded-[10px]">
-      <div className="flex flex-wrap gap-2 mb-[90px] max-h-[104px] overflow-hidden">
+    <div className="w-full lg:w-[631px] lg:h-[588px] px-[52px] py-11 bg-(--inputs) rounded-[10px]">
+      <div className="flex flex-wrap gap-2 mb-[90px] lg:max-h-[104px] overflow-hidden">
         <div className="rounded-[100px] px-[18px] py-3 max-w-[143px] h-12 bg-(--badges) mix-blend-multiply flex gap-2 items-center capitalize">
           <svg className="h-5 w-5">
             <use href="/icons.svg#icon-diagram"></use>
@@ -59,7 +59,7 @@ export default function Features({ camper }: FeaturesProps) {
         <h3 className="font-semibold text-[20px] leading-[1.2]">
           Vehicle details
         </h3>
-        <div className="w-[527px] h-px bg-(--gray-light) mt-8 mb-8"></div>
+        <div className="lg:w-[527px] h-px bg-(--gray-light) mt-8 mb-8"></div>
         <div className="space-y-4">
           {Object.entries(camperDetails).map(([key, value]) => (
             <div key={key} className="flex justify-between">

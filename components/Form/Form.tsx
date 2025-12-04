@@ -29,7 +29,7 @@ export default function BookingForm() {
   };
 
   return (
-    <div className="border border-(--gray-light) rounded-[10px] p-11 w-[641px] h-[588px]">
+    <div className="border border-(--gray-light) rounded-[10px] p-11 lg:w-[641px] h-[588px]">
       <h3 className="font-semibold text-[20px] leading-[1.2] mb-2">
         Book your campervan now
       </h3>

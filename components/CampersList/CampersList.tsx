@@ -28,14 +28,14 @@ export default function CampersList() {
       {campers.map((camper, index) => (
         <div
           key={`${camper.id}-${index}`}
-          className="border border-(--gray-light) rounded-[20px] p-6 w-[888px] h-[368px] flex gap-3"
+          className="border border-(--gray-light) rounded-[20px] p-6 w-full lg:w-[888px] h-auto lg:h-[368px] flex flex-col lg:flex-row gap-3"
         >
           <Image
             src={camper.gallery[0]?.thumb || "/placeholder.jpg"}
             alt={camper.name}
             width={292}
             height={320}
-            className="rounded-[10px] w-[292px] h-80 object-cover"
+            className="rounded-[10px] w-full lg:w-[292px] h-80 object-cover"
           />
           <div className="">
             <div className="flex justify-between items-center">
