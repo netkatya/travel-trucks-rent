@@ -30,7 +30,7 @@ export default function DateInput({ value, onChange }: DateInputProps) {
         value={value ? format(value, "dd MMMM yyyy") : ""}
         onClick={() => setOpen(!open)}
         placeholder="Booking date*"
-        className="rounded-xl px-[18px] py-[18px] w-full h-[60px] bg-(--inputs) cursor-pointer"
+        className="rounded-xl px-[18px] py-[18px] w-full h-[60px] bg-(--inputs) cursor-pointer focus:outline-none"
       />
 
       {open && (

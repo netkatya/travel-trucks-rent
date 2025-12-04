@@ -47,7 +47,7 @@ export default function BookingForm() {
             <Field
               name="name"
               placeholder="Name*"
-              className="rounded-xl px-[18px] py-[18px] w-full h-[60px] bg-(--inputs)"
+              className="rounded-xl px-[18px] py-[18px] w-full h-[60px] bg-(--inputs) focus:outline-none"
             />
             <ErrorMessage
               name="name"
@@ -59,7 +59,7 @@ export default function BookingForm() {
               name="email"
               type="email"
               placeholder="Email*"
-              className="rounded-xl px-[18px] py-[18px] w-full h-[60px] bg-(--inputs)"
+              className="rounded-xl px-[18px] py-[18px] w-full h-[60px] bg-(--inputs) focus:outline-none"
             />
             <ErrorMessage
               name="email"
@@ -81,7 +81,7 @@ export default function BookingForm() {
               name="comment"
               as="textarea"
               placeholder="Comment"
-              className="rounded-[10px] px-[18px] py-[18px] pb-[76px] w-full h-[118px] bg-(--inputs) resize-none"
+              className="rounded-[10px] px-[18px] py-[18px] pb-[76px] w-full h-[118px] bg-(--inputs) resize-none focus:outline-none"
             />
 
             <button
