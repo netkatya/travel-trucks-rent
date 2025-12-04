@@ -1,19 +1,21 @@
-import { ErrorMessage, Field, Formik, Form, FormikHelpers } from "formik";
-import { toast, ToastContainer } from "react-toastify";
+import { Formik, Form, Field, FormikHelpers, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import DateInput from "../DateInput/DateInput";
 
 export default function BookingForm() {
   const initialValues = {
     name: "",
     email: "",
-    bookingDate: "",
+    bookingDate: null as Date | null,
     comment: "",
   };
 
   const validationSchema = Yup.object({
     name: Yup.string().required("Name is required"),
     email: Yup.string().email("Invalid email").required("Email is required"),
-    bookingDate: Yup.date().required("Booking date is required"),
+    bookingDate: Yup.date().required("Booking date is required").nullable(),
     comment: Yup.string(),
   });
 
@@ -34,62 +36,64 @@ export default function BookingForm() {
       <p className="font-normal text-[16px] leading-normal text-(--gray) mb-8">
         Stay connected! We are always ready to help you.
       </p>
+
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        <Form className="flex flex-col gap-3.5 ">
-          <Field
-            name="name"
-            placeholder="Name*"
-            className="rounded-xl px-[18px] py-[18px] w-full h-[60px] bg-(--inputs)"
-          />
-          <ErrorMessage
-            name="name"
-            component="div"
-            className="text-red-500 text-sm"
-          />
+        {({ setFieldValue, values }) => (
+          <Form className="flex flex-col gap-3.5">
+            <Field
+              name="name"
+              placeholder="Name*"
+              className="rounded-xl px-[18px] py-[18px] w-full h-[60px] bg-(--inputs)"
+            />
+            <ErrorMessage
+              name="name"
+              component="div"
+              className="text-red-500 text-sm"
+            />
 
-          <Field
-            name="email"
-            type="email"
-            placeholder="Email*"
-            className="rounded-xl px-[18px] py-[18px] w-full h-[60px] bg-(--inputs)"
-          />
-          <ErrorMessage
-            name="email"
-            component="div"
-            className="text-red-500 text-sm"
-          />
+            <Field
+              name="email"
+              type="email"
+              placeholder="Email*"
+              className="rounded-xl px-[18px] py-[18px] w-full h-[60px] bg-(--inputs)"
+            />
+            <ErrorMessage
+              name="email"
+              component="div"
+              className="text-red-500 text-sm"
+            />
 
-          <Field
-            name="bookingDate"
-            type="date"
-            placeholder="Booking date*"
-            className="rounded-xl px-[18px] py-[18px] w-full h-[60px] bg-(--inputs)"
-          />
-          <ErrorMessage
-            name="bookingDate"
-            component="div"
-            className="text-red-500 text-sm"
-          />
+            <DateInput
+              value={values.bookingDate}
+              onChange={(date) => setFieldValue("bookingDate", date)}
+            />
+            <ErrorMessage
+              name="bookingDate"
+              component="div"
+              className="text-red-500 text-sm"
+            />
 
-          <Field
-            name="comment"
-            as="textarea"
-            placeholder="Comment"
-            className="rounded-[10px] px-[18px] py-[18px] pb-[76px] w-full h-[118px] bg-(--inputs) resize-none"
-          />
+            <Field
+              name="comment"
+              as="textarea"
+              placeholder="Comment"
+              className="rounded-[10px] px-[18px] py-[18px] pb-[76px] w-full h-[118px] bg-(--inputs) resize-none"
+            />
 
-          <button
-            type="submit"
-            className="rounded-[200px] px-[60px] py-4 mt-2 w-[166px] h-14 bg-(--button) font-medium text-[16px] leading-normal tracking-[-0.01em] text-(--white) m-auto"
-          >
-            Send
-          </button>
-        </Form>
+            <button
+              type="submit"
+              className="rounded-[200px] px-[60px] py-4 mt-2 w-[166px] h-14 bg-(--button) font-medium text-[16px] leading-normal tracking-[-0.01em] text-(--white) m-auto"
+            >
+              Send
+            </button>
+          </Form>
+        )}
       </Formik>
+
       <ToastContainer position="top-center" autoClose={2000} />
     </div>
   );

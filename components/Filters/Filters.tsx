@@ -76,6 +76,24 @@ export default function Filters() {
         </p>
         <div className="w-[360px] h-px bg-(--gray-light) my-6"></div>
         <div className="flex flex-wrap gap-3 mb-8">
+          {/* Automatic transmission */}
+          <label className="relative">
+            <input
+              type="checkbox"
+              checked={transmission === "automatic"}
+              onChange={toggleTransmission}
+              className="peer hidden"
+            />
+            <div
+              className="border border-(--gray-light) rounded-xl w-28 h-24 flex flex-col items-center justify-center text-center
+                 peer-checked:border-(--button) cursor-pointer transition-colors capitalize"
+            >
+              <svg className="w-6 h-6 mb-2 fill-(--main)">
+                <use href={`/icons.svg#${icons.automatic}`} />
+              </svg>
+              Automatic
+            </div>
+          </label>
           {(["AC", "kitchen", "TV", "bathroom"] as const).map((key) => (
             <label key={key} className="relative">
               <input
@@ -97,25 +115,6 @@ export default function Filters() {
               </div>
             </label>
           ))}
-
-          {/* Automatic transmission */}
-          <label className="relative">
-            <input
-              type="checkbox"
-              checked={transmission === "automatic"}
-              onChange={toggleTransmission}
-              className="peer hidden"
-            />
-            <div
-              className="border border-(--gray-light) rounded-xl w-28 h-24 flex flex-col items-center justify-center text-center
-                 peer-checked:border-(--button) cursor-pointer transition-colors capitalize"
-            >
-              <svg className="w-6 h-6 mb-2 fill-(--main)">
-                <use href={`/icons.svg#${icons.automatic}`} />
-              </svg>
-              Automatic
-            </div>
-          </label>
         </div>
 
         {/* Vehicle type */}

@@ -1,6 +1,5 @@
-// app/api/campers/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { api } from "../api"; // твой axios-инстанс
+import { api } from "../api";
 import { Camper } from "@/types/camper";
 
 interface CampersApiResponse {
@@ -31,12 +30,12 @@ export async function GET(req: NextRequest) {
       page,
       limit,
       ...(location && { location }),
-      ...(form && { form }),
       ...(transmission && { transmission }),
       ...(AC && { AC: true }),
       ...(TV && { TV: true }),
       ...(kitchen && { kitchen: true }),
       ...(bathroom && { bathroom: true }),
+      ...(form && { form }),
     };
 
     const res = await api.get<CampersApiResponse | Camper[]>("/campers", {
