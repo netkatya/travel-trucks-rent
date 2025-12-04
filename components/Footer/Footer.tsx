@@ -11,6 +11,7 @@ export default function Footer() {
           <Link
             className="font-medium text-base leading-[150%] text-center hover:text-(--button-hover)"
             href="https://www.linkedin.com/in/kateryna-pryhoda/"
+            target="blank"
           >
             Kateryna Pryhoda
           </Link>
