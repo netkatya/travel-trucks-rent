@@ -18,7 +18,7 @@ export default function Features({ camper }: FeaturesProps) {
   };
 
   return (
-    <div className="w-full lg:w-[631px] lg:h-[588px] px-[52px] py-11 bg-(--inputs) rounded-[10px]">
+    <div className="w-full lg:w-[631px] lg:h-[588px] p-6 lg:px-[52px] lg:py-11 bg-(--inputs) rounded-[10px]">
       <div className="flex flex-wrap gap-2 mb-[90px] lg:max-h-[104px] overflow-hidden">
         <div className="rounded-[100px] px-[18px] py-3 max-w-[143px] h-12 bg-(--badges) mix-blend-multiply flex gap-2 items-center capitalize">
           <svg className="h-5 w-5">

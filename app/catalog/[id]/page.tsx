@@ -79,7 +79,7 @@ export default function CamperPage() {
                 key={index}
                 src={img.thumb || "/placeholder.jpg"}
                 alt={`${camper.name} ${index}`}
-                className="w-fit h-[312px] object-cover overflow-hidden rounded-[10px]"
+                className="w-full lg:w-fit h-full lg:h-[312px] object-cover overflow-hidden rounded-[10px]"
               />
             ))}
           </div>
