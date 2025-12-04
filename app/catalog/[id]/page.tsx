@@ -44,7 +44,7 @@ export default function CamperPage() {
   if (!camper) return <p>Camper not found</p>;
 
   return (
-    <main className="mt-12 mb-20">
+    <main className="pt-12 pb-20">
       <div className="container">
         <div className="mb-15">
           <h2 className="font-semibold text-[24px] leading-[1.33] mb-2">
