@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header/Header";
+import ScrollToTopBtn from "@/components/ScrollToTop/ScrollToTop";
 
 const inter = Inter({
   variable: "--font-family",
@@ -23,6 +24,8 @@ export default function RootLayout({
       <body className={`${inter.variable} antialiased`}>
         <Header />
         {children}
+
+        <ScrollToTopBtn />
       </body>
     </html>
   );

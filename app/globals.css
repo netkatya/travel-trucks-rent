@@ -11,6 +11,10 @@
   --button: #e44848;
   --button-hover: #d84343;
   --rating: #ffc531;
+
+  --color-deco-dark: var(--button);
+  --color-deco-light: var(--gray-light);
+  
   --font-family: "Inter", sans-serif;
 }
 
@@ -83,3 +87,43 @@ html {
   }
 }
 
+@keyframes floatPulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.06);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes beat {
+  0% {
+    transform: scale(1);
+  }
+
+  25% {
+    transform: scale(1.12);
+  }
+
+  50% {
+    transform: scale(0.98);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+.floatPulse {
+  animation: floatPulse 2.2s ease-in-out infinite;
+}
+
+.beat {
+  animation: beat 0.42s ease-in-out 1;
+}

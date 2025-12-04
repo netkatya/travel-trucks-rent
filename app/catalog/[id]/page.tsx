@@ -37,7 +37,7 @@ export default function CamperPage() {
     };
 
     loadCamper();
-  }, [id]);
+  }, [id, params.id]);
 
   if (loading) return <Loader />;
 

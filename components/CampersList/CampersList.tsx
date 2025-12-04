@@ -124,7 +124,8 @@ export default function CampersList() {
 
             <Link
               href={`/catalog/${camper.id}`}
-              className="rounded-[200px] w-[166px] h-14 bg-(--button) text-(--white) font-medium text-[16px] leading-[150%] tracking-[-0.01em] flex items-center justify-center"
+              className="rounded-[200px] w-[166px] h-14 bg-(--button) text-(--white) font-medium text-[16px] leading-[150%] tracking-[-0.01em] flex items-center justify-center hover:bg-(--button-hover)
+transition-colors duration-300"
             >
               Show More
             </Link>
@@ -134,7 +135,7 @@ export default function CampersList() {
       {loading && <Loader />}
       {hasMore && !loading && (
         <button
-          className="border border-(--gray-light) rounded-[200px] w-[145px] h-14 flex items-center justify-center cursor-pointer font-medium text-base leading-normal tracking-[-0.01em] m-auto"
+          className="border border-(--gray-light) hover:border-(--button-hover) rounded-[200px] w-[145px] h-14 flex items-center justify-center cursor-pointer font-medium text-base leading-normal tracking-[-0.01em] m-auto transition-colors duration-300"
           onClick={loadMore}
         >
           Load More
