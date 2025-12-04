@@ -15,13 +15,13 @@ export const useCampersStore = create<CampersState>()(
       loading: false,
       filters: {},
 
-      fetchCampers: async (reset: boolean = true) => {
-        const { filters, limit, page, campers, loading } = get();
+      fetchCampers: async (reset: boolean = true, pageArg?: number) => {
+        const { filters, limit, campers, loading, page } = get();
         if (loading) return;
 
         set({ loading: true });
 
-        const currentPage = reset ? 1 : page;
+        const currentPage = pageArg ?? (reset ? 1 : page + 1);
 
         try {
           const items = await fetchCampersApi({
@@ -31,6 +31,7 @@ export const useCampersStore = create<CampersState>()(
           });
 
           let filteredItems = items;
+
           if (filters?.equipment?.length) {
             filteredItems = filteredItems.filter((camper) =>
               filters.equipment!.every(
@@ -52,10 +53,10 @@ export const useCampersStore = create<CampersState>()(
       },
 
       loadMore: async () => {
-        const { page, hasMore, loading } = get();
+        const { hasMore, loading, page } = get();
         if (loading || !hasMore) return;
+
         await get().fetchCampers(false);
-        set({ page: page + 1 });
       },
 
       toggleFavorite: (id: string) => {

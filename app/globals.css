@@ -14,7 +14,7 @@
 
   --color-deco-dark: var(--button);
   --color-deco-light: var(--gray-light);
-  
+
   --font-family: "Inter", sans-serif;
 }
 
@@ -50,6 +50,10 @@ button {
 
 html {
   scroll-behavior: smooth;
+}
+
+main {
+  margin-top: 75px;
 }
 
 

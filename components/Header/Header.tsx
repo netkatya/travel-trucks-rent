@@ -2,20 +2,20 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import FavoriteButton from "../FavoriteButton/FavouriteButton";
 
 export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="bg-(--inputs) border-b border-(--badges) h-[72px] pt-6 pb-6">
+    <header className="bg-(--inputs) border-b border-(--badges) h-[72px] flex items-center fixed top-0 left-0 z-99 w-full">
       <div className="container">
-        <div className="flex gap-[450px] items-center">
+        <div className="flex items-center justify-between">
           <Link href="/">
             <svg width={136} height={16}>
               <use href="/icons.svg#icon-Logo"></use>
             </svg>
           </Link>
-
           <ul className="flex gap-8">
             <li>
               <Link
@@ -49,6 +49,7 @@ export default function Header() {
               </Link>
             </li>
           </ul>
+          <FavoriteButton />
         </div>
       </div>
     </header>
