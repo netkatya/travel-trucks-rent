@@ -1,35 +1,47 @@
 "use client";
 
+import { useEffect } from "react";
+import { useCampersStore } from "@/lib/store/useCampersStore";
 import Link from "next/link";
 import Image from "next/image";
-import { useCampersStore } from "@/lib/store/useCampersStore";
 
 export default function FavoritesPage() {
-  const { campers, favorites, toggleFavorite } = useCampersStore();
+  const { campers, favorites, toggleFavorite, fetchCampers, loading } =
+    useCampersStore();
+
+  useEffect(() => {
+    if (campers.length === 0) {
+      fetchCampers();
+    }
+  }, [campers.length, fetchCampers]);
 
   const favoriteCampers = campers.filter((camper) =>
     favorites.includes(camper.id)
   );
 
+  if (loading) {
+    return <p className="text-center mt-10">Loading campers...</p>;
+  }
+
   return (
-    <main className="py-10 min-h-screen bg-[var(--white)]">
+    <main className="py-10 min-h-screen bg-(--white)">
       <div className="container">
-        <h1 className="font-semibold text-3xl mb-10 text-[var(--main)]">
+        <h1 className="font-semibold text-3xl mb-10 text-(--main)">
           Favorites
         </h1>
 
         {favoriteCampers.length === 0 ? (
-          <p className="text-[var(--gray)] text-base">
+          <p className="text-(--gray) text-base">
             You haven’t added any campers to favorites yet.
           </p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {favoriteCampers.map((camper, index) => (
               <div
-                key={`${camper.id}-${index}`} // уникальный ключ
-                className="bg-[var(--inputs)] rounded-[10px] shadow-md overflow-hidden relative"
+                key={`${camper.id}-${index}`}
+                className="bg-(--inputs) rounded-[10px] shadow-md overflow-hidden relative"
               >
-                <Link href={`/campers/${camper.id}`} className="block">
+                <Link href={`/catalog/${camper.id}`} className="block">
                   <Image
                     src={camper.gallery[0]?.thumb || "/img/placeholder.png"}
                     alt={camper.name}
@@ -40,13 +52,11 @@ export default function FavoritesPage() {
                 </Link>
 
                 <div className="p-4 flex flex-col gap-2">
-                  <h2 className="font-medium text-lg text-[var(--main)] max-h-7 overflow-hidden">
+                  <h2 className="font-medium text-lg text-(--main) max-h-7 overflow-hidden">
                     {camper.name}
                   </h2>
                   <div className="flex justify-between items-center">
-                    <p className="text-sm text-[var(--gray)]">
-                      {camper.location}
-                    </p>
+                    <p className="text-sm text-(--gray)">{camper.location}</p>
                     <button
                       className="p-2 rounded"
                       onClick={() => toggleFavorite(camper.id)}
@@ -55,8 +65,8 @@ export default function FavoritesPage() {
                       <svg
                         className={`w-[25px] h-6 transition-colors duration-300 ${
                           favorites.includes(camper.id)
-                            ? "text-[var(--button)]"
-                            : "text-[var(--main)]"
+                            ? "text-(--button)"
+                            : "text-(--main)"
                         }`}
                       >
                         <use href="/icons.svg#icon-heart" />

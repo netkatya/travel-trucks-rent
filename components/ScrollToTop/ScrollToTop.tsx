@@ -66,7 +66,6 @@ export default function ScrollToTopBtn() {
     calcDocHeight();
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
-    console.log("ScrollBtn mounted");
     const handleResize = () => {
       calcDocHeight();
       update();

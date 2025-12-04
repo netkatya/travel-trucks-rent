@@ -9,7 +9,7 @@ export default function Footer() {
             Devloped by
           </p>
           <Link
-            className="font-medium text-base leading-[150%] text-center hover:text-(--button-hover)"
+            className="font-medium text-base leading-[150%] text-center hover:text-(--button-hover) transition-colors duration-300"
             href="https://www.linkedin.com/in/kateryna-pryhoda/"
             target="blank"
           >
