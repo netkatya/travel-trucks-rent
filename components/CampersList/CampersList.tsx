@@ -70,10 +70,13 @@ export default function CampersList() {
               <p className="font-normal text-[16px] leading-[150%] underline decoration-skip-none">
                 {camper.rating}
               </p>
-              <p className="font-normal text-[16px] leading-[150%] underline decoration-skip-none mr-4">
+              <Link
+                href={`/catalog/${camper.id}/#reviews`}
+                className="font-normal text-[16px] leading-[150%] underline decoration-skip-none mr-4"
+              >
                 ({camper.reviews.length}{" "}
                 {camper.reviews.length === 1 ? "review" : "reviews"})
-              </p>
+              </Link>
               <div className="flex gap-1 items-center">
                 <Map size={16} stroke="#101828" className="w-4 h-4" />
                 <p className="font-normal text-[16px] leading-[150%]">

@@ -31,9 +31,18 @@ export default function FavoritesPage() {
         </h1>
 
         {favoriteCampers.length === 0 ? (
-          <p className="text-(--gray) text-base">
-            You haven’t added any campers to favorites yet.
-          </p>
+          <div>
+            <p className="text-(--gray) text-base mb-10">
+              You haven’t added any campers to favorites yet.
+            </p>
+            <Link
+              href="/catalog"
+              className="rounded-[200px] w-[166px] h-14 bg-(--button) text-(--white) font-medium text-[16px] leading-[150%] tracking-[-0.01em] flex items-center justify-center hover:bg-(--button-hover)
+transition-colors duration-300"
+            >
+              Catalog
+            </Link>
+          </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {favoriteCampers.map((camper, index) => (

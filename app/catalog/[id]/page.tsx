@@ -8,6 +8,7 @@ import { fetchCamper } from "@/lib/api/clientApi";
 import { Camper } from "@/types/camper";
 import { Map } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -57,10 +58,13 @@ export default function CamperPage() {
             <p className="font-normal text-[16px] leading-[150%] underline decoration-skip-none">
               {camper.rating}
             </p>
-            <p className="font-normal text-[16px] leading-[150%] underline decoration-skip-none mr-4">
+            <Link
+              href="#reviews"
+              className="font-normal text-[16px] leading-[150%] underline decoration-skip-none mr-4"
+            >
               ({camper.reviews.length}{" "}
               {camper.reviews.length === 1 ? "review" : "reviews"})
-            </p>
+            </Link>
             <div className="flex gap-1 items-center">
               <Map size={16} stroke="#101828" className="w-4 h-4" />
               <p className="font-normal text-[16px] leading-[150%]">
@@ -85,7 +89,10 @@ export default function CamperPage() {
           </div>
           <p>{camper.description}</p>
         </div>
-        <div className="flex gap-10 border-b border-(--gray-light) max-w-[1312px] mb-11">
+        <div
+          className="flex gap-10 border-b border-(--gray-light) max-w-[1312px] mb-11"
+          id="reviews"
+        >
           <button
             className={`font-semibold text-[20px] leading-[1.2] pb-8 ${
               activeTab === "features"
@@ -107,7 +114,7 @@ export default function CamperPage() {
             Reviews
           </button>
         </div>
-        <div className="flex flex-col lg:flex-row gap-10">
+        <section className="flex flex-col lg:flex-row gap-10">
           <div>
             <div>
               {activeTab === "features" && <Features camper={camper} />}
@@ -116,7 +123,7 @@ export default function CamperPage() {
           </div>
 
           <BookingForm />
-        </div>
+        </section>
       </div>
     </main>
   );
