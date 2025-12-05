@@ -89,7 +89,7 @@ export default function CamperPage() {
           </div>
           <p>{camper.description}</p>
         </div>
-        <div
+        <section
           className="flex gap-10 border-b border-(--gray-light) max-w-[1312px] mb-11"
           id="reviews"
         >
@@ -113,8 +113,8 @@ export default function CamperPage() {
           >
             Reviews
           </button>
-        </div>
-        <section className="flex flex-col lg:flex-row gap-10">
+        </section>
+        <div className="flex flex-col lg:flex-row gap-10">
           <div>
             <div>
               {activeTab === "features" && <Features camper={camper} />}
@@ -123,7 +123,7 @@ export default function CamperPage() {
           </div>
 
           <BookingForm />
-        </section>
+        </div>
       </div>
     </main>
   );
